@@ -42,8 +42,10 @@
 /** @brief defines IOCTL for starting a VM */
 #define LOADER_START_VMM                                                       \
     _IOW(0U, LOADER_START_VMM_CMD, struct start_vmm_args_t *)
+
 /** @brief defines IOCTL for stopping a VM */
 #define LOADER_STOP_VMM _IOW(0U, LOADER_STOP_VMM_CMD, struct stop_vmm_args_t *)
+
 /** @brief defines IOCTL for dumping a VMs debug ring */
 #define LOADER_DUMP_VMM _IOWR(0U, LOADER_DUMP_VMM_CMD, struct dump_vmm_args_t *)
 

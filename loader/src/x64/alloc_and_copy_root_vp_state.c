@@ -49,6 +49,10 @@
 #include <state_save_t.h>
 #include <types.h>
 
+#ifdef _MSC_VER
+#pragma warning(disable: 4152)
+#endif
+
 /**
  * <!-- description -->
  *   @brief The function's main purpose is to save state from a root VP.
@@ -73,7 +77,7 @@ alloc_and_copy_root_vp_state(struct state_save_t **const state)
     /**************************************************************************/
 
     *state = (struct state_save_t *)platform_alloc(HYPERVISOR_PAGE_SIZE);
-    if (NULL == *state) {
+    if (((void *)0) == *state) {
         BFERROR("platform_alloc failed\n");
         goto platform_alloc_state_failed;
     }
@@ -309,6 +313,10 @@ set_descriptor_failed:
     platform_free(*state, HYPERVISOR_PAGE_SIZE);
 platform_alloc_state_failed:
 
-    *state = NULL;
+    *state = ((void *)0);
     return LOADER_FAILURE;
 }
+
+#ifdef _MSC_VER
+#pragma warning(default: 4152)
+#endif

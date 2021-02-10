@@ -107,7 +107,7 @@ promote:
     call set_esr
 
     /**
-     * Note:
+     * NOTE:
      * - Once the loader's ESRs are installed into the IDT, we need to
      *   determine if an NMI has fired. If it has, we need to tell the
      *   loader's promote logic so that it can inject an NMI once

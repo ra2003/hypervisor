@@ -90,17 +90,17 @@ map_4k_page(
     }
 
     pdpt = pml4t->tables[pml4to(virt)];
-    if (NULL == pdpt) {
+    if (((void *)0) == pdpt) {
         pdpt = alloc_pdpt(pml4t, virt);
     }
 
     pdt = pdpt->tables[pdpto(virt)];
-    if (NULL == pdt) {
+    if (((void *)0) == pdt) {
         pdt = alloc_pdt(pdpt, virt);
     }
 
     pt = pdt->tables[pdto(virt)];
-    if (NULL == pt) {
+    if (((void *)0) == pt) {
         pt = alloc_pt(pdt, virt);
     }
 

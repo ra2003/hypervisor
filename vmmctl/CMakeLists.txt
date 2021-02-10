@@ -39,5 +39,6 @@ target_link_libraries(vmmctl PRIVATE
     bsl
     loader
     hypervisor
+    SetupAPI
     $<$<PLATFORM_ID:Windows>:libcmt.lib>
 )

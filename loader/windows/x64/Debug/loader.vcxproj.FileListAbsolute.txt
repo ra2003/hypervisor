@@ -1,0 +1,2 @@
+c:\working\hypervisor\loader\windows\x64\Debug\loader.sys
+c:\working\hypervisor\loader\windows\x64\Debug\loader.pdb

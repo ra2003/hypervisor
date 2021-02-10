@@ -179,13 +179,13 @@ start_vmm_per_cpu(uint32_t const cpu)
     dump_mk_args(g_mk_args[cpu], cpu);
 #endif
 
-    if (demote(g_mk_args[cpu], g_mk_state[cpu], g_root_vp_state[cpu])) {
+    // if (demote(g_mk_args[cpu], g_mk_state[cpu], g_root_vp_state[cpu])) {
         BFERROR("demote failed\n");
         goto demote_failed;
-    }
+    // }
 
-    send_command_report_on();
-    return LOADER_SUCCESS;
+    // send_command_report_on();
+    // return LOADER_SUCCESS;
 
     /**
      * TODO:

@@ -73,7 +73,7 @@ map_mk_huge_pool(
             return LOADER_FAILURE;
         }
 
-        if (map_4k_page_rw((void *)base_virt + phys, phys, pml4t)) {
+        if (map_4k_page_rw((void *)(base_virt + phys), phys, pml4t)) {
             BFERROR("map_4k_page_rw failed\n");
             return LOADER_FAILURE;
         }

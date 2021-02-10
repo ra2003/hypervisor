@@ -277,7 +277,7 @@ demote:
     push rax
 
     retfq
-    int3     /** remove straight-line speculation, unreachable */
+    int3     /* remove straight-line speculation, unreachable */
 
 gdt_and_cs_loaded:
 
@@ -301,7 +301,7 @@ gdt_and_cs_loaded:
 
     push [r14 + 0x078]
     ret
-    int3     /** remove straight-line speculation, unreachable */
+    int3     /* remove straight-line speculation, unreachable */
 
 demotion_success:
 

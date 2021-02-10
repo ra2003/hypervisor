@@ -63,7 +63,7 @@ map_mk_page_pool(
     struct pml4t_t *const pml4t)
 {
     uint64_t off;
-    uint64_t *prev = NULL;
+    uint64_t *prev = ((void *)0);
 
     for (off = ((uint64_t)0); off < page_pool->size;
          off += HYPERVISOR_PAGE_SIZE) {
@@ -74,12 +74,12 @@ map_mk_page_pool(
             return LOADER_FAILURE;
         }
 
-        if (map_4k_page_rw((void *)base_virt + phys, phys, pml4t)) {
+        if (map_4k_page_rw((void *)(base_virt + phys), phys, pml4t)) {
             BFERROR("map_4k_page_rw failed\n");
             return LOADER_FAILURE;
         }
 
-        if (NULL != prev) {
+        if (((void *)0) != prev) {
             prev[0] = base_virt + phys;
         }
 

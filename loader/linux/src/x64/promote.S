@@ -123,7 +123,7 @@ promote:
     push rax
 
     retfq
-    int3     /** remove straight-line speculation, unreachable */
+    int3     /* remove straight-line speculation, unreachable */
 
 gdt_and_cs_loaded:
 

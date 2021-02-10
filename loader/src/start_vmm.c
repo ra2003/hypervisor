@@ -218,7 +218,7 @@ verify_start_vmm_args(struct start_vmm_args_t const *const args)
         return LOADER_FAILURE;
     }
 
-    if (NULL == args->mk_elf_file.addr) {
+    if (((void *)0) == args->mk_elf_file.addr) {
         BFERROR("the microkernel is required\n");
         return LOADER_FAILURE;
     }
@@ -233,13 +233,13 @@ verify_start_vmm_args(struct start_vmm_args_t const *const args)
         return LOADER_FAILURE;
     }
 
-    if (NULL == args->ext_elf_files[((uint64_t)0)].addr) {
+    if (((void *)0) == args->ext_elf_files[((uint64_t)0)].addr) {
         BFERROR("at least one extension is required\n");
         return LOADER_FAILURE;
     }
 
     for (idx = ((uint64_t)0); idx < HYPERVISOR_MAX_EXTENSIONS; ++idx) {
-        if (NULL == args->ext_elf_files[idx].addr) {
+        if (((void *)0) == args->ext_elf_files[idx].addr) {
             if (((uint64_t)0) != args->ext_elf_files[idx].size) {
                 BFERROR("invalid extension address/size combination\n");
                 return LOADER_FAILURE;
@@ -247,7 +247,7 @@ verify_start_vmm_args(struct start_vmm_args_t const *const args)
         }
 
         if (((uint64_t)0) == args->ext_elf_files[idx].size) {
-            if (NULL != args->ext_elf_files[idx].addr) {
+            if (((void *)0) != args->ext_elf_files[idx].addr) {
                 BFERROR("invalid extension address/size combination\n");
                 return LOADER_FAILURE;
             }
@@ -278,8 +278,8 @@ start_vmm(struct start_vmm_args_t const *const ioctl_args)
     int64_t ret;
     struct start_vmm_args_t args;
 
-    if (NULL == ioctl_args) {
-        BFERROR("ioctl_args was NULL\n");
+    if (((void *)0) == ioctl_args) {
+        BFERROR("ioctl_args was ((void *)0)\n");
         return LOADER_FAILURE;
     }
 
