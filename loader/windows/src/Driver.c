@@ -176,7 +176,7 @@ Return Value:
 
     TraceEvents(TRACE_LEVEL_INFORMATION, TRACE_DRIVER, "%!FUNC! Entry");
 
-    loader_fini();
+    // loader_fini();
 
     //
     // Stop WPP Tracing
