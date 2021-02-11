@@ -34,3 +34,5 @@ loader/**/*.mod.o
 loader/**/*.mod.cmd
 loader/**/*.o
 loader/**/*.o.cmd
+
+loader/windows/x64/
