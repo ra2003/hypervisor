@@ -61,10 +61,10 @@ loader_init(void)
 
     serial_init();
 
-//     if (check_for_hve_support()) {
-//         BFERROR("check_for_hve_support failed\n");
-//         return LOADER_FAILURE;
-//     }
+    if (check_for_hve_support()) {
+        BFERROR("check_for_hve_support failed\n");
+        return LOADER_FAILURE;
+    }
 
 //     if (alloc_mk_debug_ring(&g_mk_debug_ring)) {
 //         BFERROR("alloc_mk_debug_ring failed\n");

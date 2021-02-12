@@ -28,18 +28,18 @@
 
     push rbx
 
-    mov r10, rdx
-    mov r11, rcx
+    mov r10, rcx
+    mov r11, rdx
 
-    mov eax, [rdi]
-    mov ebx, [rsi]
-    mov ecx, [r10]
-    mov edx, [r11]
+    mov eax, [r10]
+    mov ebx, [r11]
+    mov ecx, [r8]
+    mov edx, [r9]
     cpuid
-    mov [rdi], eax
-    mov [rsi], ebx
-    mov [r10], ecx
-    mov [r11], edx
+    mov [r10], eax
+    mov [r11], ebx
+    mov [r8], ecx
+    mov [r9], edx
 
     pop rbx
     ret
