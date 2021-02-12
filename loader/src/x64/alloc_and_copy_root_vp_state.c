@@ -50,7 +50,7 @@
 #include <types.h>
 
 #ifdef _MSC_VER
-#pragma warning(disable: 4152)
+#pragma warning(disable : 4152)
 #endif
 
 /**
@@ -88,15 +88,6 @@ alloc_and_copy_root_vp_state(struct state_save_t **const state)
 
     intrinsic_sgdt(&(*state)->gdtr);
     intrinsic_sidt(&(*state)->idtr);
-
-    BFDEBUG("yourmom: 0x%016llx\n", (*state)->gdtr.base[1]);
-    BFDEBUG("yourmom: 0x%016llx\n", (*state)->gdtr.base[2]);
-    BFDEBUG("yourmom: 0x%016llx\n", (*state)->gdtr.base[3]);
-    BFDEBUG("yourmom: 0x%016llx\n", (*state)->gdtr.base[4]);
-    BFDEBUG("yourmom: 0x%016llx\n", (*state)->gdtr.base[5]);
-    BFDEBUG("yourmom: 0x%016llx\n", (*state)->gdtr.base[6]);
-    BFDEBUG("yourmom: 0x%016llx\n", (*state)->gdtr.base[7]);
-    BFDEBUG("yourmom: 0x%016llx\n", (*state)->gdtr.base[8]);
 
     (*state)->es_selector = intrinsic_ses();
 
@@ -318,5 +309,5 @@ platform_alloc_state_failed:
 }
 
 #ifdef _MSC_VER
-#pragma warning(default: 4152)
+#pragma warning(default : 4152)
 #endif

@@ -26,7 +26,6 @@
 
     intrinsic_rdmsr PROC
 
-    mov ecx, edi
     xor rax, rax
     rdmsr
     shl rdx, 32

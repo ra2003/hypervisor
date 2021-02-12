@@ -27,7 +27,7 @@
     intrinsic_inb PROC
 
     xor rax, rax
-    mov rdx, rdi
+    mov rdx, rcx
     in al, dx
     ret
 

@@ -26,7 +26,7 @@
 
     intrinsic_lcr4 PROC
 
-    mov cr4, rdi
+    mov cr4, rcx
     ret
 
     intrinsic_lcr4 ENDP

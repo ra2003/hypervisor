@@ -24,6 +24,15 @@ Environment:
 #include "../include/driver.h"
 #include "queue.tmh"
 
+#include <debug.h>
+#include <dump_vmm.h>
+#include <dump_vmm_args_t.h>
+#include <start_vmm.h>
+#include <start_vmm_args_t.h>
+#include <stop_vmm.h>
+#include <stop_vmm_args_t.h>
+#include <loader_platform_interface.h>
+
 // clang-format on
 
 #ifdef ALLOC_PRAGMA
@@ -117,6 +126,13 @@ Return Value:
 
 --*/
 {
+    PVOID in = 0;
+    PVOID out = 0;
+    size_t in_size = 0;
+    size_t out_size = 0;
+
+    NTSTATUS status;
+
     TraceEvents(
         TRACE_LEVEL_INFORMATION,
         TRACE_QUEUE,
@@ -128,8 +144,61 @@ Return Value:
         (int)InputBufferLength,
         IoControlCode);
 
-    WdfRequestComplete(Request, STATUS_SUCCESS);
+    if (InputBufferLength != 0) {
+        status = WdfRequestRetrieveInputBuffer(
+            Request, InputBufferLength, &in, &in_size);
 
+        if (!NT_SUCCESS(status)) {
+            WdfRequestComplete(Request, STATUS_ACCESS_DENIED);
+            return;
+        }
+    }
+
+    if (OutputBufferLength != 0) {
+        status = WdfRequestRetrieveOutputBuffer(
+            Request, OutputBufferLength, &out, &out_size);
+
+        if (!NT_SUCCESS(status)) {
+            WdfRequestComplete(Request, STATUS_ACCESS_DENIED);
+            return;
+        }
+
+        WdfRequestSetInformation(Request, out_size);
+    }
+
+    switch (IoControlCode) {
+        case LOADER_START_VMM: {
+            if (start_vmm((struct start_vmm_args_t const *)in)) {
+                BFERROR("start_vmm failed\n");
+                WdfRequestComplete(Request, STATUS_UNSUCCESSFUL);
+                return;
+            }
+            break;
+        }
+        case LOADER_STOP_VMM: {
+            if (stop_vmm((struct stop_vmm_args_t const *)in)) {
+                BFERROR("stop_vmm failed\n");
+                WdfRequestComplete(Request, STATUS_UNSUCCESSFUL);
+                return;
+            }
+            break;
+        }
+        case LOADER_DUMP_VMM: {
+            if (dump_vmm((struct dump_vmm_args_t const *)out)) {
+                BFERROR("dump_vmm failed\n");
+                WdfRequestComplete(Request, STATUS_UNSUCCESSFUL);
+                return;
+            }
+            break;
+        }
+        default: {
+            BFERROR("invalid ioctl cmd: 0x%x\n", IoControlCode);
+            WdfRequestComplete(Request, STATUS_ACCESS_DENIED);
+            return;
+        }
+    }
+
+    WdfRequestComplete(Request, STATUS_SUCCESS);
     return;
 }
 
@@ -205,5 +274,6 @@ Return Value:
     // to crash with bugcheck code 9F.
     //
 
+    WdfRequestComplete(Request, STATUS_SUCCESS);
     return;
 }

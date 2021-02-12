@@ -26,9 +26,7 @@
 
     intrinsic_wrmsr PROC
 
-    mov ecx, edi
-    mov rax, rsi
-    mov rdx, rsi
+    mov rax, rdx
     shr rdx, 32
     wrmsr
     ret

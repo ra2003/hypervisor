@@ -26,7 +26,7 @@
 
     intrinsic_sgdt PROC
 
-    sgdt [rdi]
+    sgdt [rcx]
     ret
 
     intrinsic_sgdt ENDP

@@ -26,7 +26,7 @@
 
     intrinsic_sidt PROC
 
-    sidt [rdi]
+    sidt [rcx]
     ret
 
     intrinsic_sidt ENDP

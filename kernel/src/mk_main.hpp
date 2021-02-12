@@ -347,6 +347,9 @@ namespace mk
                 return bsl::exit_failure;
             }
 
+bsl::print<bsl::V>() << bsl::here();
+return bsl::exit_failure;
+
             if (bsl::unlikely(!m_ext_pool.bootstrap(tls))) {
                 bsl::print<bsl::V>() << bsl::here();
                 return bsl::exit_failure;

@@ -296,30 +296,30 @@ check_for_hve_support(void)
         return LOADER_FAILURE;
     }
 
-    // if (check_for_vmx_and_xsave()) {
-    //     BFERROR("check_for_vmx_and_xsave failed\n");
-    //     return LOADER_FAILURE;
-    // }
+    if (check_for_vmx_and_xsave()) {
+        BFERROR("check_for_vmx_and_xsave failed\n");
+        return LOADER_FAILURE;
+    }
 
-    // if (check_for_xsaves_and_xrstors()) {
-    //     BFERROR("check_for_xsaves_and_xrstors failed\n");
-    //     return LOADER_FAILURE;
-    // }
+    if (check_for_xsaves_and_xrstors()) {
+        BFERROR("check_for_xsaves_and_xrstors failed\n");
+        return LOADER_FAILURE;
+    }
 
-    // if (check_for_vmx_disabled()) {
-    //     BFERROR("check_for_vmx_disabled failed\n");
-    //     return LOADER_FAILURE;
-    // }
+    if (check_for_vmx_disabled()) {
+        BFERROR("check_for_vmx_disabled failed\n");
+        return LOADER_FAILURE;
+    }
 
-    // if (check_vmx_capabilities()) {
-    //     BFERROR("check_vmx_capabilities failed\n");
-    //     return LOADER_FAILURE;
-    // }
+    if (check_vmx_capabilities()) {
+        BFERROR("check_vmx_capabilities failed\n");
+        return LOADER_FAILURE;
+    }
 
-    // if (check_the_configuration_of_efer()) {
-    //     BFERROR("check_the_configuration_of_efer failed\n");
-    //     return LOADER_FAILURE;
-    // }
+    if (check_the_configuration_of_efer()) {
+        BFERROR("check_the_configuration_of_efer failed\n");
+        return LOADER_FAILURE;
+    }
 
     return LOADER_SUCCESS;
 }

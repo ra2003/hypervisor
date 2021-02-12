@@ -26,8 +26,8 @@
 
     intrinsic_outb PROC
 
-    mov rdx, rdi
-    mov rax, rsi
+    mov rax, rdx
+    mov rdx, rcx
     out dx, al
     xor rax, rax
     ret

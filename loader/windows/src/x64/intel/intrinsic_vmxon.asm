@@ -26,7 +26,7 @@
 
     intrinsic_vmxon PROC
 
-    vmxon [rdi]
+    vmxon [rcx]
     jbe intrinsic_vmxon_failure
 
     xor rax, rax

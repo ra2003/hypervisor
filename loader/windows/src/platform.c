@@ -26,11 +26,20 @@
  * SOFTWARE.
  */
 
-#include <ntddk.h>
+// clang-format off
+
+/// NOTE:
+/// - The windows includes that we use here need to remain in this order.
+///   Otherwise the code will not compile.
+///
+
+#include <Ntddk.h>
 
 #include <debug.h>
 #include <platform.h>
 #include <types.h>
+
+// clang-format on
 
 #define BF_TAG 'BFLK'
 
@@ -164,7 +173,7 @@ platform_free_contiguous(void const *const ptr, uint64_t const size)
 uintptr_t
 platform_virt_to_phys(void const *const virt)
 {
-    PHYSICAL_ADDRESS addr = MmGetPhysicalAddress((void *)virt);
+    PHYSICAL_ADDRESS addr = MmGetPhysicalAddress((PVOID)virt);
     return addr.QuadPart;
 }
 

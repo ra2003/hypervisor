@@ -83,8 +83,8 @@ namespace vmmctl
         explicit ioctl(GUID name) noexcept
         {
             BOOL ret{};
-            DWORD size{};
             HANDLE info{};
+            DWORD const flags{DIGCF_DEVICEINTERFACE | DIGCF_PRESENT};
             SP_INTERFACE_DEVICE_DETAIL_DATA *dev_data{};
 
             SP_DEVINFO_DATA dev_info{};
@@ -93,8 +93,7 @@ namespace vmmctl
             SP_INTERFACE_DEVICE_DATA if_info{};
             if_info.cbSize = sizeof(SP_INTERFACE_DEVICE_DATA);
 
-            info =
-                SetupDiGetClassDevs(&name, nullptr, nullptr, DIGCF_DEVICEINTERFACE | DIGCF_PRESENT);
+            info = SetupDiGetClassDevsW(&name, nullptr, nullptr, flags);
             if (bsl::unlikely(INVALID_HANDLE_VALUE == info)) {
                 bsl::error() << "SetupDiGetClassDevs failed\n";
                 return;
@@ -114,9 +113,16 @@ namespace vmmctl
                 return;
             }
 
-            ret = SetupDiGetDeviceInterfaceDetail(info, &if_info, nullptr, 0, &size, nullptr);
-            if (bsl::unlikely(ret == FALSE)) {
-                bsl::error() << "SetupDiGetDeviceInterfaceDetail failed\n";
+            DWORD size{};
+            ret = SetupDiGetDeviceInterfaceDetailA(info, &if_info, nullptr, 0, &size, nullptr);
+            if (bsl::unlikely(ret == TRUE)) {
+                bsl::error() << "SetupDiGetDeviceInterfaceDetailA failed\n";
+                bsl::discard(CloseHandle(info));
+                return;
+            }
+
+            if (GetLastError() != ERROR_INSUFFICIENT_BUFFER) {
+                bsl::error() << "SetupDiGetDeviceInterfaceDetailA failed\n";
                 bsl::discard(CloseHandle(info));
                 return;
             }

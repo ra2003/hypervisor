@@ -66,26 +66,26 @@ loader_init(void)
         return LOADER_FAILURE;
     }
 
-//     if (alloc_mk_debug_ring(&g_mk_debug_ring)) {
-//         BFERROR("alloc_mk_debug_ring failed\n");
-//         goto alloc_mk_debug_ring_failed;
-//     }
+    if (alloc_mk_debug_ring(&g_mk_debug_ring)) {
+        BFERROR("alloc_mk_debug_ring failed\n");
+        goto alloc_mk_debug_ring_failed;
+    }
 
-//     if (alloc_and_copy_mk_code_aliases(&g_mk_code_aliases)) {
-//         BFERROR("alloc_and_copy_mk_code_aliases failed\n");
-//         goto alloc_and_copy_mk_code_aliases_failed;
-//     }
+    if (alloc_and_copy_mk_code_aliases(&g_mk_code_aliases)) {
+        BFERROR("alloc_and_copy_mk_code_aliases failed\n");
+        goto alloc_and_copy_mk_code_aliases_failed;
+    }
 
-// #ifdef DEBUG_LOADER
-//     dump_mk_debug_ring(g_mk_debug_ring);
-//     dump_mk_code_aliases(&g_mk_code_aliases);
-// #endif
+#ifdef DEBUG_LOADER
+    dump_mk_debug_ring(g_mk_debug_ring);
+    dump_mk_code_aliases(&g_mk_code_aliases);
+#endif
 
     return LOADER_SUCCESS;
 
-// alloc_and_copy_mk_code_aliases_failed:
-//     free_mk_debug_ring(&g_mk_debug_ring);
-// alloc_mk_debug_ring_failed:
+alloc_and_copy_mk_code_aliases_failed:
+    free_mk_debug_ring(&g_mk_debug_ring);
+alloc_mk_debug_ring_failed:
 
-//     return LOADER_FAILURE;
+    return LOADER_FAILURE;
 }

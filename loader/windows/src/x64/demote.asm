@@ -56,9 +56,9 @@
     ; Setup
     ; **************************************************************************
 
-    mov r13, rdi       ; args
-    mov r14, rsi       ; mk_state
-    mov r15, rdx       ; root_vp_state
+    mov r13, rcx       ; args
+    mov r14, rdx       ; mk_state
+    mov r15, r8        ; root_vp_state
 
     ; **************************************************************************
     ; Flags

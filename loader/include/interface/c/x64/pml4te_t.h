@@ -30,7 +30,7 @@
 #pragma pack(push, 1)
 
 #ifdef _MSC_VER
-#pragma warning(disable: 4214)
+#pragma warning(disable : 4214)
 #endif
 
 #include <static_assert.h>
@@ -76,7 +76,7 @@ struct pml4te_t
 STATIC_ASSERT(sizeof(struct pml4te_t) == 8, invalid_size);
 
 #ifdef _MSC_VER
-#pragma warning(default: 4214)
+#pragma warning(default : 4214)
 #endif
 
 #pragma pack(pop)

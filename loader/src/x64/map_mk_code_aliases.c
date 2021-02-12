@@ -38,7 +38,7 @@
 #include <promote.h>
 
 #ifdef _MSC_VER
-#pragma warning(disable: 4152)
+#pragma warning(disable : 4152)
 #endif
 
 /**
@@ -149,5 +149,5 @@ map_mk_code_aliases(
 }
 
 #ifdef _MSC_VER
-#pragma warning(default: 4152)
+#pragma warning(default : 4152)
 #endif
